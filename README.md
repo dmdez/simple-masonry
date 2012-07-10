@@ -7,12 +7,12 @@ The plugin gets the immediate children and applies the masonry logic to only tho
 
 ## Markup
 ```
-&lt;div class="masonry"&gt;
-	&lt;div class="child"&gt;
+<div class="masonry">
+	<div class="child">
 		...
-	&lt;/div&gt;
+	</div>
 	...
-&lt;/div&gt;
+</div>
 ```
 
 ## Usage
