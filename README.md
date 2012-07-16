@@ -19,3 +19,6 @@ The plugin gets the immediate children and applies the masonry logic to only tho
 ```
 $('.masonry').simplemasonry()
 ```
+
+## Demo
+http://www.dericmendez.com/simple-masonry/
