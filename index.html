@@ -6,12 +6,15 @@
     <meta name="viewport" content="width=device-width">
 
     <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if necessary -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.js"></script>
-    <script src="jquery.simplemasonry.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>
+    <script src="jquery.simplemasonry.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             var newItems = $('.masonry1 li').clone();
-            $('.masonry').simplemasonry();
+            $('.masonry1').simplemasonry();
+            $('.masonry2').simplemasonry({ animate: true, timeout: 500 });
+            $('.masonry3').simplemasonry({ animate: true });
+
             setTimeout(function() {
                 $('.masonry1').append(newItems).simplemasonry('refresh');
             }, 1000);
@@ -28,8 +31,10 @@
             padding: 1em;
             box-shadow: 0 0 4px #999;            
         }
+        .masonry li img { width: 100%; display: block; }
         .masonry2 li { width: 300px; }
         .masonry2 li .content { background: #ffe;}
+        .masonry3 li { width: 25%; }
         @media all and (min-width: 400px) and (max-width: 700px) {
             .masonry1 li { width: 25%; }
         }
@@ -41,6 +46,16 @@
 <body>
     <div class="canvas">
         <h2>Fixed Width</h2>
+
+        <ul class="masonry masonry3">
+            <li><a href="http://www.google.com/1"><img src="https://lh4.googleusercontent.com/-ei9m1LX-ZYg/TYn7Fv4gHmI/AAAAAAAABbM/YBfGIdFGIsI/s640/January08%252520030.jpg" /></a></li>
+            <li><a href="http://www.google.com/2"><img src="https://lh3.googleusercontent.com/-6Dx4cwjo_RY/TYn7LzyeCuI/AAAAAAAABbQ/MR99Pp8hJnY/s800/Picture%252520796.jpg" /></a></li>
+            <li><a href="http://www.google.com/3"><img src="https://lh3.googleusercontent.com/-mUINKkxp0dM/TYn7Y_tiVTI/AAAAAAAABbU/ZaS-kVYAO8c/s800/100_2050.jpg" /></a></li>
+            <li><a href="http://www.google.com/4"><img src="https://lh5.googleusercontent.com/--jK3HNy-iuI/TYn7fUDSRWI/AAAAAAAABbY/zu8J8BOA1RM/s800/2009%252520029.jpg" /></a></li>
+            <li><a href="http://www.google.com/5"><img src="https://lh5.googleusercontent.com/-kduSLLNl49Q/TYn-kP9v8II/AAAAAAAABbc/hExLswwbt-M/lucas-toby.jpg" /></a></li>
+            <li><a href="http://www.google.com/6"><img src="https://lh6.googleusercontent.com/-tFwklP49YvA/TYn-kPx0gVI/AAAAAAAABbg/AkHjpEMN5Zg/s640/lucas-me.jpg" /></a></li>
+        </ul>
+
         <ul class="masonry masonry2">
             <li>
                 <div class="content">

@@ -4,16 +4,45 @@
 	    return Math.max.apply( Math, array );
 	};
 
+	$.easing.__Slide = function (x, t, b, c, d) {
+		return c * Math.sqrt(1 - (t=t/d-1)*t) + b;
+	};
+
 	$.simplemasonry = function(element, options) {
 
-        var defaults = {};
+        var defaults = {
+        	'animate': false,
+        	'easing': '__Slide',
+        	'timeout': 800
+        };
         var settings = $.extend({}, defaults, options);	        
 		var $element = $(element);		
-        var _ml = this;
+		var _sm = this;
 
-		$.extend(_ml, {
+		$.extend(_sm, {
 
-			refresh: function() {  
+			refresh: function() {
+
+		        var $images = $('img', element);
+		        var numImages = $images.length;
+		        var imgLoadCount = 0;
+
+		        if ( $images.length > 0 )
+		        	$element.addClass('sm-images-waiting').removeClass('sm-images-loaded');
+
+				$images.on('load', function(i) {
+					imgLoadCount++;
+					
+					if ( imgLoadCount == numImages ) {
+						_sm.resize();
+						$element.removeClass('sm-images-waiting').addClass('sm-images-loaded');
+					}						
+				});
+
+				_sm.resize();
+			},
+
+			resize: function() {
 				var $children = $element.children();      
 				var childInfo = childElementInfo($children[0]);
 				var width = childInfo['width'];
@@ -24,13 +53,22 @@
 					var height = $(this).outerHeight();
 					var col = 0;
 					var addToCol = minIndex(column_matrix);
-					var pos = addToCol * width;
+					var leftPos = Math.round((addToCol * width) * 10) / 10;
+					var positionProps = { 
+						'left'     : leftPos + '%',
+						'top'      : column_matrix[addToCol] + 'px'
+					};
 
-					$(this).css({ 
-						'position' : 'absolute',
-						'left'     : pos + '%',
-						'top'      : column_matrix[addToCol] + 'px'						
-					});
+					$(this)
+						.css({
+							'position' : 'absolute'
+						})
+						.stop();
+
+					if ( settings['animate'] )
+						$(this).animate(positionProps, settings['timeout'], settings['easing']);
+					else
+						$(this).css(positionProps);
 
 					column_matrix[addToCol] += height;
 				};
@@ -47,8 +85,9 @@
 
 		});
 
-		$(window).resize(_ml.refresh);
-		_ml.refresh();
+		$(window).resize(_sm.resize);
+		$element.addClass('sm-loaded');
+		_sm.refresh();
 	};
 
 	function minIndex(arry) {
