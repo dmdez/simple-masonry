@@ -35,4 +35,4 @@ If animations are turned on, the timeout of the animation can be controlled by a
 If animations are turned on, easing of the animation can be changed here.  You can either use jQuery's default easing options, or you can define your own custom easing and change the easing value to that name.
 
 ## Demo
-http://dmmendez.github.com/simple-masonry/
+http://dmdez.github.com/simple-masonry/
