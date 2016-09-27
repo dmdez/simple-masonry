@@ -43,7 +43,7 @@
 			},
 
 			resize: function() {
-				var $children = $element.children();      
+				var $children = $element.children(':visible');      
 				var childInfo = childElementInfo($children[0]);
 				var width = childInfo['width'];
 				var columns = childInfo['num'];
